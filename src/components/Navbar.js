@@ -1,6 +1,7 @@
 import {FaBars, FaTimes} from 'react-icons/fa';
 import React, {useState} from 'react'
 import './Navbar.css'
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
     const [click, setClick] = useState(false)
@@ -8,7 +9,7 @@ const Navbar = () => {
   return (
     <div className='header'>
         <div className="container">
-            <h1>iCe<span className='primary'>Coin</span></h1>
+            <Link to='/'><h1>iCe<span className='primary'>Coin</span></h1></Link>
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                 <li><a href="/">Home</a></li>
                 <li><a href="/">Featured</a></li>

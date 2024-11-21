@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { FiArrowUpRight, FiArrowDown } from "react-icons/fi";
 import "./Featured.css";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const Featured = () => {
   const [data, setData] = useState(null);
@@ -27,8 +28,12 @@ const Featured = () => {
         {/* Left side */}
         <div className="left">
           <h2>Explore top Crypto's Like Bitcoin, Ethereum and Dogecoin</h2>
-          <p>See all available assets: Cryptocurrencies and NFT's</p>
-          <button className="btn">See More Coins</button>
+          <p>Calculate all available assets: Cryptocurrencies and NFT's</p>
+          <Link to="/crypto-calculator">
+            <button className="btn" style={{ width: "100%" }}>
+              Calculate Coins
+            </button>
+          </Link>
         </div>
         {/* Right side */}
         <div className="right">
@@ -42,12 +47,12 @@ const Featured = () => {
             </div>
             {data[0].price_change_percentage_24h < 0 ? (
               <span className="red">
-                <FiArrowDown className='icon' />
+                <FiArrowDown className="icon" />
                 {data[0].price_change_percentage_24h.toFixed(2)}%
               </span>
             ) : (
               <span className="green">
-                <FiArrowUpRight className='icon' />
+                <FiArrowUpRight className="icon" />
                 {data[0].price_change_percentage_24h.toFixed(2)}%
               </span>
             )}
@@ -63,12 +68,12 @@ const Featured = () => {
             </div>
             {data[1].price_change_percentage_24h < 0 ? (
               <span className="red">
-                <FiArrowDown className='icon' />
+                <FiArrowDown className="icon" />
                 {data[1].price_change_percentage_24h.toFixed(2)}%
               </span>
             ) : (
               <span className="green">
-                <FiArrowUpRight className='icon' />
+                <FiArrowUpRight className="icon" />
                 {data[1].price_change_percentage_24h.toFixed(2)}%
               </span>
             )}
@@ -84,12 +89,12 @@ const Featured = () => {
             </div>
             {data[2].price_change_percentage_24h < 0 ? (
               <span className="red">
-                <FiArrowDown className='icon' />
+                <FiArrowDown className="icon" />
                 {data[2].price_change_percentage_24h.toFixed(2)}%
               </span>
             ) : (
               <span className="green">
-                <FiArrowUpRight className='icon' />
+                <FiArrowUpRight className="icon" />
                 {data[2].price_change_percentage_24h.toFixed(2)}%
               </span>
             )}
@@ -105,12 +110,12 @@ const Featured = () => {
             </div>
             {data[3].price_change_percentage_24h < 0 ? (
               <span className="red">
-                <FiArrowDown className='icon' />
+                <FiArrowDown className="icon" />
                 {data[3].price_change_percentage_24h.toFixed(2)}%
               </span>
             ) : (
               <span className="green">
-                <FiArrowUpRight className='icon' />
+                <FiArrowUpRight className="icon" />
                 {data[3].price_change_percentage_24h.toFixed(2)}%
               </span>
             )}
@@ -126,12 +131,12 @@ const Featured = () => {
             </div>
             {data[4].price_change_percentage_24h < 0 ? (
               <span className="red">
-                <FiArrowDown className='icon' />
+                <FiArrowDown className="icon" />
                 {data[4].price_change_percentage_24h.toFixed(2)}%
               </span>
             ) : (
               <span className="green">
-                <FiArrowUpRight className='icon' />
+                <FiArrowUpRight className="icon" />
                 {data[4].price_change_percentage_24h.toFixed(2)}%
               </span>
             )}
@@ -147,12 +152,12 @@ const Featured = () => {
             </div>
             {data[5].price_change_percentage_24h < 0 ? (
               <span className="red">
-                <FiArrowDown className='icon' />
+                <FiArrowDown className="icon" />
                 {data[5].price_change_percentage_24h.toFixed(2)}%
               </span>
             ) : (
               <span className="green">
-                <FiArrowUpRight className='icon' />
+                <FiArrowUpRight className="icon" />
                 {data[5].price_change_percentage_24h.toFixed(2)}%
               </span>
             )}
