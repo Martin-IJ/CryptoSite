@@ -9,21 +9,18 @@ function CryptoCalculator() {
   const [profit, setProfit] = useState("");
   const [warning, setWarning] = useState("");
 
-  // Format numbers with commas
   const formatNumber = (value) => {
     if (!value) return "";
     return parseFloat(value).toLocaleString("en-US");
   };
 
-  // Handle input changes and remove commas for calculations
   const handleInputChange = (setter) => (e) => {
-    const rawValue = e.target.value.replace(/,/g, ""); // Remove commas while typing
+    const rawValue = e.target.value.replace(/,/g, "");
     if (!isNaN(rawValue)) {
       setter(rawValue);
     }
   };
 
-  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
