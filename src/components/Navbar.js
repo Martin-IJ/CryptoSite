@@ -13,7 +13,7 @@ const Navbar = () => {
             <ul className={click ? 'nav-menu active' : 'nav-menu'}>
                 <li><a href="/">Home</a></li>
                 <li><a href="/">Featured</a></li>
-                <li><a href="/">Earn</a></li>
+                <li><Link to='/crypto-calculator'>Calculate</Link></li>
                 <li><a href="/">Contact</a></li>
             </ul>
             <div className="btn-group">

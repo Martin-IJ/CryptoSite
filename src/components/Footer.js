@@ -1,15 +1,18 @@
 import React from "react";
 import "./Footer.css";
 import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
     <div className="footer">
       <div className="container">
         <div className="col col-1">
-          <h2>
-            iCe<span className="primary">Coin</span>
-          </h2>
+          <Link to="/">
+            <h2>
+              iCe<span className="primary">Coin</span>
+            </h2>
+          </Link>
         </div>
         <div className="col">
           <h5>Support</h5>

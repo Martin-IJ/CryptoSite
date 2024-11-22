@@ -5,9 +5,25 @@ function CryptoCalculator() {
   const [initialPrice, setInitialPrice] = useState("");
   const [investment, setInvestment] = useState("");
   const [newPrice, setNewPrice] = useState("");
-  const [result, setResult] = useState("");
+  const [total, setTotal] = useState("");
+  const [profit, setProfit] = useState("");
   const [warning, setWarning] = useState("");
 
+  // Format numbers with commas
+  const formatNumber = (value) => {
+    if (!value) return "";
+    return parseFloat(value).toLocaleString("en-US");
+  };
+
+  // Handle input changes and remove commas for calculations
+  const handleInputChange = (setter) => (e) => {
+    const rawValue = e.target.value.replace(/,/g, ""); // Remove commas while typing
+    if (!isNaN(rawValue)) {
+      setter(rawValue);
+    }
+  };
+
+  // Handle form submission
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -31,9 +47,8 @@ function CryptoCalculator() {
     const netProfit = currentValue - invest;
 
     setWarning("");
-    setResult(
-      `Total = $${currentValue.toFixed(2)}. Profit = $${netProfit.toFixed(2)}`
-    );
+    setTotal(`Total = $${formatNumber(currentValue.toFixed(2))}`);
+    setProfit(`Profit = $${formatNumber(netProfit.toFixed(2))}`);
   };
 
   return (
@@ -45,11 +60,12 @@ function CryptoCalculator() {
               Initial Price:
             </label>
             <input
-              type="number"
-              id="initial-price"
-              value={initialPrice}
-              onChange={(e) => setInitialPrice(e.target.value)}
               autoFocus
+              type="text"
+              placeholder="$"
+              id="initial-price"
+              value={formatNumber(initialPrice)}
+              onChange={handleInputChange(setInitialPrice)}
             />
           </div>
 
@@ -58,10 +74,11 @@ function CryptoCalculator() {
               Investment:
             </label>
             <input
-              type="number"
+              type="text"
               id="investment"
-              value={investment}
-              onChange={(e) => setInvestment(e.target.value)}
+              placeholder="$"
+              value={formatNumber(investment)}
+              onChange={handleInputChange(setInvestment)}
             />
           </div>
 
@@ -70,10 +87,11 @@ function CryptoCalculator() {
               New Price:
             </label>
             <input
-              type="number"
+              type="text"
               id="new-price"
-              value={newPrice}
-              onChange={(e) => setNewPrice(e.target.value)}
+              placeholder="$"
+              value={formatNumber(newPrice)}
+              onChange={handleInputChange(setNewPrice)}
             />
           </div>
 
@@ -83,7 +101,10 @@ function CryptoCalculator() {
         </form>
 
         {warning && <span className="warning">{warning}</span>}
-        <p className="calc-result">{result}</p>
+        <div className="totalPrice">
+          <p className="calc-total">{total}</p>
+          <p className="calc-profit">{profit}</p>
+        </div>
       </div>
     </main>
   );
