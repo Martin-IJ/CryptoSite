@@ -8,9 +8,9 @@ const Hero = () => {
         <div className="container">
             {/* Left side */}
             <div className="left">
-                <p>Buy & Sell Crypto 24/7 using your retirement account</p>
+                {/* <p>Buy & Sell Crypto 24/7 using your retirement account</p> */}
                 <h1>Invest in Cryptocurrency with Your IRA</h1>
-                <p>Suy, Sell and Store hundreds of Cryptocurrencies</p>
+                <p>Buy, Sell and Store hundreds of Cryptocurrencies</p>
                 <div className="input-container">
                     <input type="text" placeholder='Enter your email' />
                     <button className="btn">Learn More</button>
