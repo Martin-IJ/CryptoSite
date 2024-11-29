@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Signup from "./components/Signup";
 import { Route, Routes } from "react-router-dom";
 import CryptoCalculator from "./components/CryptoCalculator";
+import { Analytics } from "@vercel/analytics/react";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/crypto-calculator" element={<CryptoCalculator />} />
       </Routes>
       <Footer />
+      <Analytics />
     </>
   );
 }
