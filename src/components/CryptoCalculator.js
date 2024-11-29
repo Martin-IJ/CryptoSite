@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { GoInfo } from "react-icons/go";
+import axios from "axios";
 import "./CryptoCalculator.css";
 
 function CryptoCalculator() {
@@ -8,16 +10,34 @@ function CryptoCalculator() {
   const [total, setTotal] = useState("");
   const [profit, setProfit] = useState("");
   const [warning, setWarning] = useState("");
+  const [coins, setCoins] = useState([]);
+  const [selectedCoin, setSelectedCoin] = useState("select");
 
-  const formatNumber = (value) => {
-    if (!value) return "";
-    return parseFloat(value).toLocaleString("en-US");
-  };
+  const url =
+    "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=6&page=1&sparkline=false";
 
-  const handleInputChange = (setter) => (e) => {
-    const rawValue = e.target.value.replace(/,/g, "");
-    if (!isNaN(rawValue)) {
-      setter(rawValue);
+  useEffect(() => {
+    axios
+      .get(url)
+      .then((response) => {
+        setCoins(response.data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  const handleCoinChange = (e) => {
+    const coinId = e.target.value;
+    setSelectedCoin(coinId);
+
+    if (coinId !== "select") {
+      const selected = coins.find((coin) => coin.id === coinId);
+      if (selected) {
+        setNewPrice(selected.current_price);
+      }
+    } else {
+      setNewPrice("");
     }
   };
 
@@ -44,25 +64,51 @@ function CryptoCalculator() {
     const netProfit = currentValue - invest;
 
     setWarning("");
-    setTotal(`Total = $${formatNumber(currentValue.toFixed(2))}`);
-    setProfit(`Profit = $${formatNumber(netProfit.toFixed(2))}`);
+    setTotal(`Total: $${Number(currentValue.toFixed(2)).toLocaleString()}`);
+    setProfit(`Profit: $${Number(netProfit.toFixed(2)).toLocaleString()}`);
   };
 
   return (
     <main className="calc-container">
+      <div className="info">
+        <GoInfo className="info-icon" />
+        <p className="explanation">
+          Select a coin from the dropdown to auto-fill the New Price (optional)
+          or enter it manually. Provide the Initial Price and your Investment
+          Amount, then click Calculate to view your profit or loss.
+        </p>
+      </div>
       <div className="calc-cont">
         <form onSubmit={handleSubmit}>
+          <div>
+            <label className="calc-label" htmlFor="coin-select">
+              Select Coin:
+            </label>
+            <select
+              id="coin-select"
+              value={selectedCoin}
+              onChange={handleCoinChange}
+            >
+              <option value="select">--- Select coin ---</option>
+              {coins.map((coin) => (
+                <option key={coin.id} value={coin.id}>
+                  {coin.name}
+                </option>
+              ))}
+            </select>
+          </div>
+
           <div>
             <label className="calc-label" htmlFor="initial-price">
               Initial Price:
             </label>
             <input
               autoFocus
-              type="text"
+              type="number"
               placeholder="$"
               id="initial-price"
-              value={formatNumber(initialPrice)}
-              onChange={handleInputChange(setInitialPrice)}
+              value={initialPrice}
+              onChange={(e) => setInitialPrice(e.target.value)}
             />
           </div>
 
@@ -71,11 +117,11 @@ function CryptoCalculator() {
               Investment:
             </label>
             <input
-              type="text"
+              type="number"
               id="investment"
               placeholder="$"
-              value={formatNumber(investment)}
-              onChange={handleInputChange(setInvestment)}
+              value={investment}
+              onChange={(e) => setInvestment(e.target.value)}
             />
           </div>
 
@@ -84,11 +130,12 @@ function CryptoCalculator() {
               New Price:
             </label>
             <input
-              type="text"
+              type="number"
               id="new-price"
               placeholder="$"
-              value={formatNumber(newPrice)}
-              onChange={handleInputChange(setNewPrice)}
+              value={newPrice}
+              onChange={(e) => setNewPrice(e.target.value)}
+              readOnly={selectedCoin !== "select"}
             />
           </div>
 
