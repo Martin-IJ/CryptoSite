@@ -1,0 +1,18 @@
+.pageNotFound{
+    height: 50vh;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pageNotFound p{
+    margin-top: 10px;
+}
+
+.pageNotFound p span{
+    color: green;
+    font-weight: 700;
+    text-decoration: underline;
+}

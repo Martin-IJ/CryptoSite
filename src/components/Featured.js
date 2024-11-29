@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { FiArrowUpRight, FiArrowDown } from "react-icons/fi";
-import "./Featured.css";
-import axios from "axios";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import "./Featured.css";
 
 const Featured = () => {
   const [data, setData] = useState(null);

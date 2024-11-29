@@ -25,6 +25,11 @@
   display: flex;
 }
 
+.nav-menu .active {
+  font-weight: bold;
+  color: var(--primary);
+}
+
 .nav-menu li {
   padding: 0 1rem;
 }
